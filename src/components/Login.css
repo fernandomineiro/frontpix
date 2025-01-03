@@ -1,0 +1,34 @@
+/* CSS para o formulário de login */
+.custom-form {
+    background-color: #f9fafb; /* Fundo claro para o formulário */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
+    border-radius: 1rem; /* Bordas arredondadas para um visual mais elegante */
+  }
+  
+  .custom-input {
+    transition: all 0.3s ease-in-out; /* Transição suave ao focar ou passar o mouse */
+  }
+  
+  .custom-input:hover {
+    border-color: #4f46e5; /* Mudança de cor na borda quando o mouse passa por cima */
+  }
+  
+  .custom-input:focus {
+    border-color: #4f46e5; /* Cor da borda ao focar no campo */
+    background-color: #f3f4f6; /* Cor de fundo suave no foco */
+  }
+  
+  .custom-btn {
+    background-color: #4f46e5; /* Cor principal do botão (azul suave) */
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease; /* Transição suave */
+  }
+  
+  .custom-btn:hover {
+    background-color: #4338ca; /* Cor de fundo mais escura ao passar o mouse */
+    transform: translateY(-2px); /* Efeito de movimento suave para o botão */
+  }
+  
+  .custom-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.4); /* Efeito de foco mais forte no botão */
+  }
