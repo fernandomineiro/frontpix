@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { transferPix } from '../services/api';  // Função para chamar a API para fazer o pagamento PIX
+import { transferPix } from '../services/api';  
+import  useCurrencyMask  from '../hooks/useCurrencyMask'
 
 const TransferPix: React.FC = () => {
   const { user, token } = useAuth();
-  const [value, setValue] = useState<number>(0);
+  const { value, setValue } = useCurrencyMask();
   const [description, setDescription] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [successMessage, setSuccessMessage] = useState<string>('');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawValue = e.target.value.replace(/\D/g, ""); // Remove tudo que não for número
+    setValue(rawValue); // Atualiza o estado com valor sem máscara
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,7 +31,6 @@ const TransferPix: React.FC = () => {
         if (user && token) {
       await transferPix(user.id, value, description, token);
       setSuccessMessage('Pagamento PIX realizado com sucesso!');
-      setValue(0);
       setDescription('');
         }
     } catch (err) {
@@ -46,12 +51,13 @@ const TransferPix: React.FC = () => {
         <div>
           <label htmlFor="value" className="block font-medium">Valor</label>
           <input
-            type="number"
+            type="text" // Mudei de "number" para "text" para permitir a formatação
             id="value"
             value={value}
-            onChange={(e) => setValue(Number(e.target.value))}
+            onChange={handleInputChange} // Usando a função para tratar a entrada
             className="mt-1 block w-full border-gray-300 rounded-md"
             required
+            placeholder="R$ 0,00"
           />
         </div>
 

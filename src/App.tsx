@@ -2,12 +2,12 @@ import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import DashboardPage from './pages/Dashboard';
 import LoginPage from './pages/LoginPage';
+import CreatePage from './pages/CreatePage'
 import './App.css'
 import { AuthProvider } from './contexts/AuthContext';
 import TransferPixPage from './pages/TransferPixPage';
-
-function App() {
-  const [count, setCount] = useState(0)
+import PrivateRoute from "./routes/PrivateRoute";
+const  App = () => {
 
   return (
     <>
@@ -15,8 +15,15 @@ function App() {
      <Router>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<DashboardPage />} />
-        <Route path="/transfer" element={<TransferPixPage />} />
+        <Route path="/create" element={<CreatePage />} />
+        <Route
+            path="/"
+            element={<PrivateRoute element={<DashboardPage />} />}
+          />
+              <Route
+            path="/transfer"
+            element={<PrivateRoute element={<TransferPixPage />} />}
+          />
       </Routes>
 
     </Router>
